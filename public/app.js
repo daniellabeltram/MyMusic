@@ -447,6 +447,39 @@ window.addEventListener("resize", () => {
 });
 drawNoteBorder();
 
+// ---------- inspiration banner ----------
+const INSPIRATION = [
+  "Every great song started as a feeling someone decided to share.",
+  "You don't need to be a musician to have music inside you.",
+  "Hum the melody in your head — today it gets to be heard.",
+  "Your story deserves a soundtrack. Write the first line.",
+  "There are no wrong notes when you're creating something new.",
+  "Turn the moment you never want to forget into a song.",
+  "Somewhere, someone needs to hear the song only you can make.",
+  "Start with one idea. The music will find the rest.",
+  "Make it loud, make it soft — just make it yours.",
+  "Every chorus begins with the courage to try.",
+];
+let inspireIdx = 0;
+let inspireTimer;
+function nextInspiration() {
+  const el = $("inspireText");
+  inspireIdx = (inspireIdx + 1) % INSPIRATION.length;
+  el.classList.add("fade");
+  setTimeout(() => {
+    el.textContent = INSPIRATION[inspireIdx];
+    el.classList.remove("fade");
+  }, 350);
+}
+function startInspiration() {
+  clearInterval(inspireTimer);
+  inspireTimer = setInterval(nextInspiration, 9000);
+}
+$("inspire").addEventListener("click", () => { nextInspiration(); startInspiration(); });
+inspireIdx = Math.floor(Math.random() * INSPIRATION.length);
+$("inspireText").textContent = INSPIRATION[inspireIdx];
+startInspiration();
+
 // ---------- boot ----------
 setMode("simple");
 render();

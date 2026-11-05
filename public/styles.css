@@ -316,3 +316,41 @@ h1, h2, .brand, .t-title, .pt { color: var(--heading, var(--text)); }
   .top-right { gap: 6px; }
   .theme-switch button { padding: 5px 7px; }
 }
+
+/* ---------- inspiration banner ---------- */
+.inspire {
+  position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 14px;
+  width: calc(100% - 48px); max-width: 1152px; margin: 4px auto 18px; padding: 14px 20px;
+  border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; font: inherit; text-align: left;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent) 12%, var(--panel)),
+    color-mix(in srgb, var(--accent-2) 12%, var(--panel)));
+  color: var(--heading, var(--text)); box-shadow: var(--shadow);
+}
+.inspire:hover { border-color: var(--accent); }
+.inspire-note {
+  flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 22px; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  animation: inspire-bounce 2.4s ease-in-out infinite;
+}
+.inspire-text {
+  font-size: 16px; font-weight: 600; font-style: italic; line-height: 1.4;
+  transition: opacity .35s ease;
+}
+.inspire-text.fade { opacity: 0; }
+@keyframes inspire-bounce {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(-8deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .inspire-note { animation: none; }
+  .inspire-text { transition: none; }
+}
+@media (max-width: 900px) {
+  .inspire { width: calc(100% - 32px); }
+}
+@media (max-width: 600px) {
+  .inspire { padding: 12px 14px; gap: 10px; margin-bottom: 14px; }
+  .inspire-note { width: 34px; height: 34px; font-size: 18px; }
+  .inspire-text { font-size: 14px; }
+}
