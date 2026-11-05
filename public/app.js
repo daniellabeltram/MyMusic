@@ -407,6 +407,46 @@ document.querySelectorAll("[data-theme-choice]").forEach((b) =>
   })
 );
 
+// ---------- musical-note border ----------
+const NOTE_GLYPHS = ["♪", "♫", "♩", "♬", "♪", "♫"];
+function drawNoteBorder() {
+  const root = $("noteBorder");
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const small = w < 600;
+  const inset = small ? 9 : 16;      // distance of note centres from the edge
+  const gap = small ? 40 : 54;       // spacing between notes
+  const size = small ? 14 : 20;
+  const points = [];
+  const along = (len) => {
+    const n = Math.max(2, Math.round((len - inset * 2) / gap));
+    return Array.from({ length: n + 1 }, (_, i) => inset + ((len - inset * 2) * i) / n);
+  };
+  along(w).forEach((x) => { points.push([x, inset]); points.push([x, h - inset]); });
+  along(h).slice(1, -1).forEach((y) => { points.push([inset, y]); points.push([w - inset, y]); });
+
+  const frag = document.createDocumentFragment();
+  points.forEach(([x, y], i) => {
+    const el = document.createElement("span");
+    el.className = "note" + (i % 3 === 1 ? " alt" : "");
+    el.textContent = NOTE_GLYPHS[i % NOTE_GLYPHS.length];
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    el.style.fontSize = `${size + ((i * 7) % 5) - 2}px`;
+    el.style.setProperty("--r", `${((i * 37) % 30) - 15}deg`);
+    el.style.setProperty("--dur", `${5 + ((i * 13) % 4)}s`);
+    el.style.setProperty("--delay", `${-((i * 0.7) % 6)}s`);
+    frag.append(el);
+  });
+  root.replaceChildren(frag);
+}
+let noteTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(noteTimer);
+  noteTimer = setTimeout(drawNoteBorder, 150);
+});
+drawNoteBorder();
+
 // ---------- boot ----------
 setMode("simple");
 render();
