@@ -13,7 +13,7 @@
     // Apply saved theme before first paint to avoid a flash.
     try {
       var t = localStorage.getItem("mymusic.theme");
-      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      if (t === "light" || t === "dark" || t === "red") document.documentElement.setAttribute("data-theme", t);
     } catch (e) {}
   </script>
   <link rel="stylesheet" href="styles.css" />
@@ -27,6 +27,7 @@
         <button type="button" data-theme-choice="light" title="Light theme"><span class="ico">☀︎</span><span class="txt">Light</span></button>
         <button type="button" data-theme-choice="system" title="Match system"><span class="ico">◐</span><span class="txt">System</span></button>
         <button type="button" data-theme-choice="dark" title="Dark theme"><span class="ico">☾</span><span class="txt">Dark</span></button>
+        <button type="button" data-theme-choice="red" title="Red theme"><span class="ico red-dot">●</span><span class="txt">Red</span></button>
       </div>
       <div class="credits" id="credits" title="Remaining sunoapi.org credits">Credits: …</div>
     </div>

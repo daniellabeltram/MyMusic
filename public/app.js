@@ -390,7 +390,7 @@ $("clearBtn").onclick = () => {
 // ---------- theme ----------
 const THEME_KEY = "mymusic.theme";
 function applyTheme(choice) {
-  if (choice === "light" || choice === "dark") document.documentElement.setAttribute("data-theme", choice);
+  if (choice === "light" || choice === "dark" || choice === "red") document.documentElement.setAttribute("data-theme", choice);
   else document.documentElement.removeAttribute("data-theme");
   document.querySelectorAll("[data-theme-choice]").forEach((b) =>
     b.setAttribute("aria-pressed", b.dataset.themeChoice === choice)
