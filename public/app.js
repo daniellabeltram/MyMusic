@@ -387,6 +387,26 @@ $("clearBtn").onclick = () => {
   render();
 };
 
+// ---------- theme ----------
+const THEME_KEY = "mymusic.theme";
+function applyTheme(choice) {
+  if (choice === "light" || choice === "dark") document.documentElement.setAttribute("data-theme", choice);
+  else document.documentElement.removeAttribute("data-theme");
+  document.querySelectorAll("[data-theme-choice]").forEach((b) =>
+    b.setAttribute("aria-pressed", b.dataset.themeChoice === choice)
+  );
+}
+let themeChoice = "system";
+try { themeChoice = localStorage.getItem(THEME_KEY) || "system"; } catch {}
+applyTheme(themeChoice);
+document.querySelectorAll("[data-theme-choice]").forEach((b) =>
+  b.addEventListener("click", () => {
+    themeChoice = b.dataset.themeChoice;
+    try { localStorage.setItem(THEME_KEY, themeChoice); } catch {}
+    applyTheme(themeChoice);
+  })
+);
+
 // ---------- boot ----------
 setMode("simple");
 render();

@@ -9,12 +9,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    // Apply saved theme before first paint to avoid a flash.
+    try {
+      var t = localStorage.getItem("mymusic.theme");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand"><span class="logo">♪</span> MyMusic</div>
-    <div class="credits" id="credits" title="Remaining sunoapi.org credits">Credits: …</div>
+    <div class="top-right">
+      <div class="theme-switch" role="group" aria-label="Theme">
+        <button type="button" data-theme-choice="light" title="Light theme"><span class="ico">☀︎</span><span class="txt">Light</span></button>
+        <button type="button" data-theme-choice="system" title="Match system"><span class="ico">◐</span><span class="txt">System</span></button>
+        <button type="button" data-theme-choice="dark" title="Dark theme"><span class="ico">☾</span><span class="txt">Dark</span></button>
+      </div>
+      <div class="credits" id="credits" title="Remaining sunoapi.org credits">Credits: …</div>
+    </div>
   </header>
 
   <main class="layout">
